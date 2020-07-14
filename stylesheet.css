@@ -96,3 +96,8 @@ body {
 .divTableBody {
     display: table-row-group;
 }
+
+#content-results {
+    padding: 10px;
+    
+}

@@ -80,13 +80,14 @@ var list_of_tag_combinations = [
 * @return {boolean}  Returns true if tag is in array.
 */
 function get_filters() {
+    console.log("Get filters")
     var filters = [];
     var collection = document.getElementsByClassName("active");
     var l = collection.length;
     for (i = 0; i < l; i++) {
         filters.push(collection[i].id);
     }
-
+    console.log(filters)
     return filters;
 };
 
@@ -96,6 +97,7 @@ function get_filters() {
 * @return {boolean}  Returns true if tag is in array.
 */
 function refresh_div() {
+    console.log("Refresh tags.")
     var collection = document.getElementsByClassName("active");
     // var l = collection.length;
 
@@ -134,7 +136,7 @@ function click_div(id) {
 function check_tags(operator, filter_tags) {
     console.log("Checking tags")
     var bool = filter_tags.some(r=> operator.tags.includes(r));
-        
+    console.log(bool)
     return bool;
 };
 
@@ -145,6 +147,7 @@ function check_tags(operator, filter_tags) {
 * @return {array} result list of ops that match at least one filter tag
 */
 function get_ops(filter_tags) {
+    console.log("Getting Operators")
     result = [];
     list_of_ops.forEach(function(ops) {
         console.log("Checking " + ops.name);
@@ -153,7 +156,7 @@ function get_ops(filter_tags) {
             result.push(ops);
         }
     })
-    
+    console.log(result)
     return result;
 };
 
@@ -167,15 +170,18 @@ function get_ops(filter_tags) {
  * @returns {boolean}
  */
 function arrayContainsArray (superset, subset) {
-  if (0 === subset.length) {
-    return false;
-  }
-  return subset.every(function (value) {
-    return (superset.indexOf(value) >= 0);
-  });
+    console.log("Comparing tags...")
+    if (0 === subset.length) {
+        console.log("Error: Subset longer than superset.")
+        return false;
+    }
+    return subset.every(function (value) {
+        return (superset.indexOf(value) >= 0);
+    });
 }
 
 function intersection(filter_combinations, operators) {
+    console.log("Ordering tag combinations and operators...")
     var sorted_operators = new Object();
     // sorted[{'tags': 'sniper', 'operators': [meteorite, Exusiai,...]},
     //           {'tags': 'caster', 'operators': [haze, ...]}]
@@ -189,10 +195,18 @@ function intersection(filter_combinations, operators) {
     for (ele of sorted) {
         for (ops of operators) {
             if (arrayContainsArray(ops.tags, ele["tags"])) {
-                console.log(ops.name + " is a subset of " + ele["tags"])
+                console.log(ele["tags"] + " is a subset of " + ops.name)
                 ele["operators"].push(ops)
             }
         }
+    }
+
+    //get rid of empty combinations
+    var i = sorted.length
+    while (i--) {
+        if (sorted[i]['operators'].length < 1) { 
+            sorted.splice(i, 1);
+        } 
     }
 
     console.log(sorted)
@@ -204,6 +218,7 @@ function intersection(filter_combinations, operators) {
 * Create a list of user input combinations
 */
 function create_result_list(input) {
+    console.log("Creating tag combinations...")
     var result = [];
     var f = function(prefix=[], array) {
     for (var i = 0; i < array.length; i++) {
@@ -223,27 +238,36 @@ function create_result_list(input) {
 function start() {
     //get active filters from divs
     var filter_input = get_filters();
-    console.log(filter_input);
+    if (filter_input.length > 5 || filter_input.length < 1) {
+        console.log("Error: Invalid number of tags chosen.")
+        alert('Please choose up to 5 tags.');
+        refresh_div();
+    } else {
+        console.log(filter_input);
 
-    //get list of ops that fit the filter
-    var operators = get_ops(filter_input);
+        //get list of ops that fit the filter
+        var operators = get_ops(filter_input);
 
-    //get list of tag combinations
-    var input_combinations = create_result_list(filter_input);
+        //get list of tag combinations
+        var input_combinations = create_result_list(filter_input);
 
-    var sorted_operators = new Object();
+        //asign operators to tag combinations
+        var sorted = intersection(input_combinations, operators);
 
-    var sorted = intersection(input_combinations, operators);
-    var ops_tag;
-    var s = "Results: ";
-
-    for (ops_tag of sorted) {
-        s += "Title:" + ops_tag["tags"] + " - Operators: ";
-        for (ops of ops_tag["operators"]) {
-            s += ops.name + ", ";
+        var ops_tag;
+        var s = "";
+        for (ops_tag of sorted) {
+            s += "<h3>" + ops_tag["tags"] + "</h3><p>";
+            for (ops of ops_tag["operators"]) {
+                s += ops.rarity + "&starf; " + ops.name + ", ";
+            }
+            s = s.slice(0, -2)  //remove the last redundant ", "
+            s += "</p>"         //close paragraph
+            s += "\n"
         }
-        s += "\n"
+        console.log(s);
+        document.getElementById("content-results").innerHTML = s;
     }
-    console.log(s);
+    
 
 };
