@@ -1,0 +1,98 @@
+h1, h2, h3 {
+    font-family: 'Alegreya SC', serif;
+    text-align: center;
+}
+
+body {
+    background-color: gray;
+}
+
+/* wrappers */
+.sitewide-wrapper {
+    top: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    max-width: 600px;
+    margin: auto;
+    background-color: #fff;
+}
+
+.button-wrapper {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.filter {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    color: #000;
+}
+
+.active {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    color: #fff;
+}
+/* DivTable.com */
+.divTable{
+    display: table;
+    width: 100%;
+}
+.divTableRow {
+    display: table-row;
+}
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+}
+.divTableCell, .divTableHead {
+    font-family: 'Marcellus SC', serif;
+    font-size: 1em;
+    border: 1px solid #999999;
+    display: table-cell;
+    height: 40px;
+    width: 50%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.divTableCell-qualifications {
+    font-family: 'Marcellus SC', serif;
+    font-size: 0.8em;
+    border: 1px solid #999999;
+    display: table-cell;
+    height: 40px;
+    width: 33%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.divTableCell-tags {
+    font-family: 'Marcellus SC', serif;
+    font-size: 0.8em;
+    border: 1px solid #999999;
+    display: table-cell;
+    height: 40px;
+    width: 25%;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.divTableHeading {
+    background-color: #EEE;
+    display: table-header-group;
+    font-weight: bold;
+}
+.divTableFoot {
+    background-color: #EEE;
+    display: table-footer-group;
+    font-weight: bold;
+}
+.divTableBody {
+    display: table-row-group;
+}

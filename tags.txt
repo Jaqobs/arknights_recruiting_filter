@@ -1,0 +1,19 @@
+Guard, Sniper, Defender, Medic, Supporter, Vanguard, Caster, Specialist
+Ranged, Melee
+DPS, Healing, AoE, DP Recovery, Slow
+
+guard, defender
+
+medic, vanguard
+
+medic, caster
+
+medic, supporter
+
+defender, supporter, specialist, vanguard
+
+ranged, melee
+
+starter, healing, dp-recover, dps, AoE
+
+healing, dp-recovery,, defense, Survival, Support, Debuff, Slow, Shift, Crowd Control Nuker, Summon, Fast-Redeploy, Robot
