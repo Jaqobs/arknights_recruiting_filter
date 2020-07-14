@@ -107,6 +107,7 @@ function refresh_div() {
     while (collection[0]) {
         collection[0].classList.remove("active");
     }
+    document.getElementById("content-results").innerHTML = "";
 };
 
 /** 
