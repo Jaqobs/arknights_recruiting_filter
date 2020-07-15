@@ -91,6 +91,7 @@ function get_filters() {
     return filters;
 };
 
+
 /** 
 * Reset all filters.
 * 
@@ -109,6 +110,7 @@ function refresh_div() {
     }
     document.getElementById("content-results").innerHTML = "";
 };
+
 
 /** 
 * Mark div with active class on click/unclick. 
@@ -141,6 +143,7 @@ function check_tags(operator, filter_tags) {
     return bool;
 };
 
+
 /** 
 * Returns ops that match the filter tags.
 * 
@@ -160,6 +163,7 @@ function get_ops(filter_tags) {
     console.log(result)
     return result;
 };
+
 
 /**
  * Returns TRUE if the first specified array contains all elements
@@ -181,6 +185,17 @@ function arrayContainsArray (superset, subset) {
     });
 }
 
+
+/**
+ * Assigns operators to each tag combination. Removes tag combinations with
+ * empty operator array at the end.
+ *
+ * @param {array} filter_combinations Tag combinations
+ * @param {array} operators Array with operators
+ *
+ * @returns {array} returns an array that contains a dictionary with 
+ * tag combinations and operators that match these tags
+ */
 function intersection(filter_combinations, operators) {
     console.log("Ordering tag combinations and operators...")
     var sorted_operators = new Object();
@@ -215,6 +230,7 @@ function intersection(filter_combinations, operators) {
     return sorted
 };
 
+
 /** 
 * Create a list of user input combinations
 */
@@ -232,6 +248,7 @@ function create_result_list(input) {
 
     return result;
 }
+
 
 /** 
 * Start of script when user presses submit
@@ -269,6 +286,4 @@ function start() {
         console.log(s);
         document.getElementById("content-results").innerHTML = s;
     }
-    
-
 };
