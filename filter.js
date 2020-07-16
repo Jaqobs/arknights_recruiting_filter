@@ -328,11 +328,11 @@ function start() {
                     case 5:
                         s += "background-color:#E3983F\"";
                     case 4:
-                        s += "background-color:#D5C6B5\"";
+                        s += "background-color:#4A73AD\"";
                     case 3:
-                        s += "background-color:#52A0CD\"";
-                    case 2:
                         s += "background-color:#57BF7A\"";
+                    case 2:
+                        s += "background-color:#878b91\"";
                     default:
                         s += "background-color:#F0F4F2\"";
                 }

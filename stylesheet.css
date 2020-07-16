@@ -136,20 +136,24 @@ img {
 
 #content-results {
     padding: 20px;
-    min-height: 200px;
+    
 }
 
 .content-results-section-header {
-    float: none;
+    width: 100%;
+    display: inline-block;
 }
 
 .content-results-section {
-    float: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: inline-block;
 }
 
 .content-results-operator {
-    float: left;
+    display: inline-block;
     width: 80px;
     margin: 5px;
     padding: 5px;
