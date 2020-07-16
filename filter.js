@@ -252,44 +252,63 @@ function create_result_list(input) {
 }
 
 
+function sort_result_list(array) {
+    //sort array based on longest tag combination first
+    array.sort((a, b) => b["tags"].length - a["tags"].length);
+    console.log(array)
+    //sort operators based on highest rarity first
+    let tag_combination;
+    for (tag_combination of array) {
+        console.log("Loop: " + tag_combination)
+        tag_combination["operators"].sort((a, b) => b["rarity"] - a["rarity"]);
+    }
+
+    return array
+}
+
+
+function create_HTML_content(array) {
+    let ops_tag;
+    let ops;
+    let s = "";
+
+    //loop through tag combinations
+    for (ops_tag of array) { 
+        s += "<div class=\"content-results-section-header\"><h3>" + ops_tag["tags"] + "</h3></div>"; //generate section header and section
+        s += "<div class=\"content-results-section\">";
+
+        //loop through ops for each tag combination
+        for (ops of ops_tag["operators"]) {
+            //generate content-results-operator, content-results-operator-img and content-results-operator-name
+            s += "<div class=\"content-results-operator\" style=\"";
+            switch (ops['rarity']) {
+                case 6:
+                    s += "background-color:#FF5733\"";
+                    break;
+                case 5:
+                    s += "background-color:#E3983F\"";
+                case 4:
+                    s += "background-color:#4A73AD\"";
+                case 3:
+                    s += "background-color:#57BF7A\"";
+                case 2:
+                    s += "background-color:#878b91\"";
+                default:
+                    s += "background-color:#F0F4F2\"";
+            }
+            s += "><div class=\"content-results-operator-img\"><img src=\"" + ops['img-url'] + "\"></div>"
+            s += "<div class=\"content-results-operator-name\">" + ops['name'] + "</div></div>"
+        }
+        s += "</div>"         //close div
+    }
+    console.log(s);
+
+    return s
+}
+
 /** 
 * Start of script when user presses submit
 */
-// function start() {
-//     //get active filters from divs
-//     var filter_input = get_filters();
-//     if (filter_input.length > 5 || filter_input.length < 1) {
-//         console.log("Error: Invalid number of tags chosen.")
-//         alert('Please choose up to 5 tags.');
-//         refresh_div();
-//     } else {
-//         console.log(filter_input);
-
-//         //get list of ops that fit the filter
-//         var operators = get_ops(filter_input);
-
-//         //get list of tag combinations
-//         var input_combinations = create_result_list(filter_input);
-
-//         //asign operators to tag combinations
-//         var sorted = intersection(input_combinations, operators);
-
-//         var ops_tag;
-//         var s = "";
-//         for (ops_tag of sorted) {
-//             s += "<h3>" + ops_tag["tags"] + "</h3><p>";
-//             for (ops of ops_tag["operators"]) {
-//                 s += ops.rarity + "&starf; " + ops.name + ", ";
-//             }
-//             s = s.slice(0, -2)  //remove the last redundant ", "
-//             s += "</p>"         //close paragraph
-//             s += "\n"
-//         }
-//         console.log(s);
-//         document.getElementById("content-results").innerHTML = s;
-//     }
-// };
-
 function start() {
     //get active filters from divs
     var filter_input = get_filters();
@@ -308,40 +327,8 @@ function start() {
 
         //asign operators to tag combinations
         var sorted = intersection(input_combinations, operators);
-
-        var ops_tag;
-        var s = "";
-
-        //loop through tag combinations
-        for (ops_tag of sorted) { 
-            s += "<div class=\"content-results-section-header\"><h3>" + ops_tag["tags"] + "</h3></div>"; //generate section header and section
-            s += "<div class=\"content-results-section\">";
-
-            //loop through ops for each tag combination
-            for (ops of ops_tag["operators"]) {
-                //generate content-results-operator, content-results-operator-img and content-results-operator-name
-                s += "<div class=\"content-results-operator\" style=\"";
-                switch (ops['rarity']) {
-                    case 6:
-                        s += "background-color:#FF5733\"";
-                        break;
-                    case 5:
-                        s += "background-color:#E3983F\"";
-                    case 4:
-                        s += "background-color:#4A73AD\"";
-                    case 3:
-                        s += "background-color:#57BF7A\"";
-                    case 2:
-                        s += "background-color:#878b91\"";
-                    default:
-                        s += "background-color:#F0F4F2\"";
-                }
-                s += "><div class=\"content-results-operator-img\"><img src=\"" + ops['img-url'] + "\"></div>"
-                s += "<div class=\"content-results-operator-name\">" + ops['name'] + "</div></div>"
-            }
-            s += "</div>"         //close div
-        }
-        console.log(s);
+        sorted = sort_result_list(sorted);
+        s = create_HTML_content(sorted);
         document.getElementById("content-results").innerHTML = s;
     }
 };
