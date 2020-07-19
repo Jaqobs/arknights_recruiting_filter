@@ -287,14 +287,19 @@ function create_HTML_content(array) {
                     break;
                 case 5:
                     s += "background-color:#E3983F\"";
+                    break;
                 case 4:
                     s += "background-color:#4A73AD\"";
+                    break;
                 case 3:
                     s += "background-color:#57BF7A\"";
+                    break;
                 case 2:
                     s += "background-color:#878b91\"";
+                    break;
                 default:
                     s += "background-color:#F0F4F2\"";
+                    break;
             }
             s += "><div class=\"content-results-operator-img\"><img src=\"" + ops['img-url'] + "\"></div>"
             s += "<div class=\"content-results-operator-name\">" + ops['name'] + "</div></div>"

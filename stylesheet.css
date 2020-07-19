@@ -135,7 +135,7 @@ img {
 }
 
 #content-results {
-    padding: 20px;
+    padding: 10px;
     
 }
 
@@ -145,17 +145,22 @@ img {
 }
 
 .content-results-section {
+    width: 100%;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: inline-block;
+    padding: 4%;
+    align-content: center;
+    text-align: center;
 }
 
 .content-results-operator {
     display: inline-block;
-    width: 80px;
-    margin: 5px;
+    width: 27%;
+    max-width: 150px;
+    margin: 1%;
     padding: 5px;
 }
 
@@ -164,5 +169,5 @@ img {
 }
 
 .content-results-operator-name {
-
+    text-align: right;
 }
