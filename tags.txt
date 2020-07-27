@@ -14,6 +14,6 @@ defender, supporter, specialist, vanguard
 
 ranged, melee
 
-starter, healing, dp-recover, dps, AoE
+healing, starter, dp-recover, defense, dps, survival, slow, AoE, fast-redeploy
 
 healing, dp-recovery,, defense, Survival, Support, Debuff, Slow, Shift, Crowd Control Nuker, Summon, Fast-Redeploy, Robot
